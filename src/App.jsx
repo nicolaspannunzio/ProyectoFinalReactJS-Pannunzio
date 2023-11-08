@@ -1,5 +1,4 @@
-import { NavBar } from "./Components/NavBar/NavBar"
-import { ItemListContainer } from "./Components/ItemListContainer/ItemListContainer"
+import { NavBar, ItemListContainer } from "./Components"
 
 export const App = () => {
   return (
@@ -9,5 +8,3 @@ export const App = () => {
     </>
   )
 }
-
-export default App
