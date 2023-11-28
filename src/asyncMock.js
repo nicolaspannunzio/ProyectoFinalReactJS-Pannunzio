@@ -13,18 +13,18 @@ export const getProducts = () => {
         if (products.length > 0){
            setTimeout (() => {
             resolve (products)
-            }, 1500) 
+            }, 1500); 
         } else {
             reject ("Producto no encontrado");
         }
     });
- }
+}
 
 export const getProductById = (id) => {
   return new Promise ((resolve, reject) => {
 
     if (products.length > 0) {
-        const product = products.find (product => product.id === id);
+        const product = products.find (p => p.id === id);
 
         setTimeout (() => {
             if(!product){

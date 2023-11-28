@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export const ItemListContainer = () => {
   const { category } = useParams();
-0
+
   const [products, setProducts] = useState ([]);
   const [isLoading, setIsLoading] = useState (true);
 
@@ -14,8 +14,8 @@ export const ItemListContainer = () => {
     getProducts()
       .then((resp) => {
         if (category) {
-          const productsFilter = resp.filter ( product => product.category === category );
-          if (productsFilter.lenght > 0) {
+          const productsFilter = resp.filter ( (p) => p.category === category );
+          if (productsFilter.length > 0) {
             setProducts (productsFilter);
           } else {
           setProducts(resp);
@@ -29,5 +29,5 @@ export const ItemListContainer = () => {
       .catch((error) => console.log(error));
   }, [category]);
 
-  return <> {isLoading ? ( <h2> Cargando productos... </h2> ) : ( <ItemList products = {products} key={products.id} /> )} </>
+  return <> {isLoading ? <h2> Cargando productos... </h2> : <ItemList products = {products} key={products.id} />} </>;
 };
