@@ -23,10 +23,7 @@ export const NavBar = () => {
             <button className="btn btn-dark mx-4">Galaxy A</button>
           </Link>
         </div>
-
-        <Link to="/cart">
-          <CartWidget />
-        </Link>
+            <CartWidget />
       </nav>
     </>
   );

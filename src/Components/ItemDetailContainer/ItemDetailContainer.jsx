@@ -1,19 +1,38 @@
 import { useEffect, useState } from "react";
-import { getProductById } from "../../asyncMock";
 import { ItemDetail } from "../ItemDetail/ItemDetail";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../config/firebaseConfig"
 
 export const ItemDetailContainer = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [item, setItem] = useState(null);
 
-  useEffect (() => {
-    getProductById(id)
-      .then((resp) => setItem(resp))
-      .catch((error) => console.log(error));
-  }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const itemRef = doc(db, "products", id);
+        const docSnap = await getDoc(itemRef);
+
+        if (docSnap.exists()) {
+          setItem({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          ((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Error');
+      }
+    };
+
+    fetchData();
+  }, [id, navigate]);
 
   return (
-    <> {item && <ItemDetail {...item} />} </>
+    <> <div>{item && <ItemDetail {...item} />}</div> </>
   )
 };

@@ -1,18 +1,27 @@
 import { ItemCount } from "../ItemCount/ItemCount";
-import styles from "../ItemDetail/ItemDetail.module.css";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+import './ItemDetail.css';
 
-export const ItemDetail = ({ description, img, price, stock, name}) => {
+export const ItemDetail = ({ description, img, price, stock, name }) => {
+    const { addItem } = useContext(CartContext) ;
 
     const onAdd = (items) => {
-        alert (`Se agregaron ${items} al carrito`);
-    }
+        addItem({
+          stock,
+          name,
+          description,
+          img,
+          price
+        }, items);
+    };
 
   return (
     <div className="border">
         <div className="card">
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>
-                <img src={img} alt="imagen" />
+                <img className= "img-detail" src={img} alt="imagen" />
                 <p className="card-text"> {description} </p>
                 <p>Precio: {price} </p>
                 <ItemCount stock = {stock} onAdd = {onAdd} />

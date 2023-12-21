@@ -17,6 +17,10 @@ export const ItemCount = ({ stock, initial = 1, onAdd }) => {
     setCount(count - 1);
   };
 
+  const reset = () => {
+    setCount(initial);
+  };
+
   return (
     <div className="d-flex flex-column col-2 justify-content-center align-content-center p-4">
       <div>
@@ -27,8 +31,11 @@ export const ItemCount = ({ stock, initial = 1, onAdd }) => {
         <button className="btn btn-outline-secondary mx-3" onClick={decrement}>
           -
         </button>
+        <button className="btn btn-outline-secondary mx-3" onClick={reset}>
+          Anular producto 
+        </button>
+        <button className="btn btn-outline-primary mt-2" onClick={() => onAdd(count)}>Agregar al carrito</button>
       </div>
-      <button className="btn btn-outline-primary mt-2" onClick={() => onAdd(count)}>Agregar al carrito</button>
     </div>
   );
 };
